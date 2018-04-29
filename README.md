@@ -5,22 +5,24 @@
 We'll introduce components, explain why they're important, and look at a few examples.
 
 ## Objectives
-1. Understand React components
-2. Create a React component by extending the `React.Component` class
-3. Re-use that component in a parent component
+
+1.  Understand React components
+2.  Create a React component by extending the `React.Component` class
+3.  Re-use that component in a parent component
 
 ## Components?
 
 Let's examine a high level overview of what a React component is before we implement one. The official [React documentation on components][react-component] says it best:
 
->Components let you split the UI into independent, reusable pieces, and think
->about each piece in isolation.
+> Components let you split the UI into independent, reusable pieces, and think
+> about each piece in isolation.
 
 Components modularize both _functionality_ and _presentation_ in our code. In order to understand how powerful this is, consider just how complicated user interfaces of web applications can become. The difficulty in logically arranging, architecting, and programming these web applications increases with their size. Components are like little packages: they help us keep everything organized and predictable while abstracting the ['boiler plate'][boiler-plate] code.
 
 Enough of a description -- let's see some examples! While they are much more than this, the first thing we need to understand about components is the ways in which they act as templates. Let's start simply and build up from there:
 
 ---
+
 ### Step 1 -- make a component
 
 In the following, we are defining a `Comment` component to display a single user comment:
@@ -28,11 +30,7 @@ In the following, we are defining a `Comment` component to display a single user
 ```javascript
 class Comment extends React.Component {
   render() {
-    return (
-      <div>
-        i am a hard coded comment! help! make me dynamic!
-      </div>
-    )
+    return <div>i am a hard coded comment! help! make me dynamic!</div>;
   }
 }
 ```
@@ -40,7 +38,8 @@ class Comment extends React.Component {
 When React creates this element and adds it to the DOM, the resulting HTML will look just as you would expect:
 
 ```HTML
-<div>i am a hard coded comment! help! make me dynamic!</div>
+<div>i am a hard coded comment! help! make me dynamic!
+</div>
 ```
 
 ---
@@ -52,11 +51,7 @@ Let's imagine we have a blog post online describing the fact (note: not opinion)
 ```javascript
 class Comment extends React.Component {
   render() {
-    return (
-      <div className="comment">
-        {this.props.content}
-      </div>  
-    )
+    return <div className="comment">{this.props.content}</div>;
   }
 }
 
@@ -64,17 +59,19 @@ class BlogPost extends React.Component {
   render() {
     return (
       <div id="blog-post">
-
         <div id="blog-content">
           Dear Reader: Bjarne Stroustrup has the perfect lecture oration.
         </div>
 
-        <Comment content={"I agree with this statement. - Angela Merkel"}/>
-        <Comment content={"A universal truth. - Noam Chomsky"}/>
-        <Comment content={"Truth is singular. Its ‘versions’ are mistruths. - Sonmi-451"}/>
-
+        <Comment content={'I agree with this statement. - Angela Merkel'} />
+        <Comment content={'A universal truth. - Noam Chomsky'} />
+        <Comment
+          content={
+            'Truth is singular. Its ‘versions’ are mistruths. - Sonmi-451'
+          }
+        />
       </div>
-    )
+    );
   }
 }
 ```
@@ -87,7 +84,9 @@ There is quite a bit going on here. Most notably, we are passing the content inf
 // this.props.what!? Here, we are making use of the 'templating' nature of React
 // components. Information is passed to the component itself, which can then
 // dynamically render it.
-<div className="comment"> // `className=` is used in place of traditional `class=`
+<div className="comment">
+  {' '}
+  // `className=` is used in place of traditional `class=`
   {this.props.contents}
 </div>
 ```
@@ -100,16 +99,16 @@ There is quite a bit going on here. Most notably, we are passing the content inf
   <div id="blog-content">
     Dear Reader: Bjarne Stroustrup has the perfect lecture oration.
   </div>
-
   // Here is where the real magic comes in: we are rendering multiple components
-  // within a single parent component. Pay close attention to that funky
-  // content={'blah'} portion. We are defining a variable that is passed to
-  // every `Comment` component. Thereafter, we can access that `content` variable within
-  // the `Comment` component via the `this.props.content` you see above.
-  <Comment content={"I agree with this statement.<br/>- Angela Merkel"}/>
-  <Comment content={"A universal truth.<br/>- Noam Chomsky"}/>
-  <Comment content={"Truth is singular. Its ‘versions’ are mistruths<br/>- Sonmi-451"}/>
-
+  // within a single parent component. Pay close attention to that funky //
+  content={'blah'} portion. We are defining a variable that is passed to // every
+  `Comment` component. Thereafter, we can access that `content` variable within //
+  the `Comment` component via the `this.props.content` you see above.
+  <Comment content={'I agree with this statement.<br/>- Angela Merkel'} />
+  <Comment content={'A universal truth.<br/>- Noam Chomsky'} />
+  <Comment
+    content={'Truth is singular. Its ‘versions’ are mistruths<br/>- Sonmi-451'}
+  />
 </div>
 ```
 
@@ -149,9 +148,10 @@ Alright now! If this is the first time you have seen React syntax, take a moment
 ## Summary
 
 **React components:**
-  - Are modular, reusable, and enable a 'templating' like functionality
-  - help us organize our user interfaces _functionality_ and _presentation_
-  - enable us to think about each piece in isolation, improving our ability to assert structure on increasingly complex programs
+
+* Are modular, reusable, and enable a 'templating' like functionality
+* help us organize our user interfaces _functionality_ and _presentation_
+* enable us to think about each piece in isolation, improving our ability to assert structure on increasingly complex programs
 
 While HTML elements are the basic building blocks of an application (for example, a `<div>`), a React application usually consists of several React _components_ combined together. Unlike the simple HTML elements, React components are smarter and bigger. They allow you to add event handlers, store internal state, communicate with other components, and much more.
 
@@ -166,7 +166,8 @@ React is a living framework that is constantly being updated and improved upon. 
 In older versions a method, `React.createClass()`, was used in place of where we were defining our own `Class`es and extending the `React.component` class (see code above!). While this `React.createClass()` method of creating React components has since been deprecated, it is still present in many older code bases and tutorials. For now, we recommend sticking with the up-to-date class syntax we present, but don't be alarmed if you come across unfamiliar ways to create React components. The [React documentation][old-react] is always there for you regarding backwards compatibility.
 
 ## Resources
-- [React Top-Level API](https://reactjs.org/docs/react-api.html)
+
+* [React Top-Level API](https://reactjs.org/docs/react-api.html)
 
 [old-react]: https://reactjs.org/docs/react-without-es6.html
 [react-component]: https://reactjs.org/docs/components-and-props.html
